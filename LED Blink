@@ -1,0 +1,25 @@
+#include<LPC17xx.h>
+
+void delay(uint8_t sec);
+int main()
+{
+	
+	LPC_GPIO1->FIODIR|=(1<<29);                //p1.29 as o/p for LED
+     
+    while(1)
+    {
+            LPC_GPIO1->FIOSET|=(1<<29);        //set p1.29 pin
+						delay(1);                          			 //Delay for 1sec
+            LPC_GPIO1->FIOCLR|=(1<<29);        //clear p1.29 pin
+						delay(1);                         				//Delay for 1sec
+    }
+}
+
+void delay(uint8_t sec)
+{
+	unsigned int a;
+		for(;sec>0;sec--)
+		{
+			for(a=0;a<12100000;a++);
+		}
+}
